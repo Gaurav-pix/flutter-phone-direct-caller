@@ -33,7 +33,7 @@ class FlutterPhoneDirectCallerPlugin : FlutterPlugin, ActivityAware {
 
     override fun onDetachedFromEngine(binding: FlutterPluginBinding) {}
     override fun onAttachedToActivity(activityPluginBinding: ActivityPluginBinding) {
-        handler!!.setActivityPluginBinding(activityPluginBinding)
+        handler?.setActivityPluginBinding(activityPluginBinding)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {}
@@ -78,11 +78,11 @@ internal class FlutterPhoneDirectCallerHandler :
         if (requestCode == CALL_REQ_CODE) {
             for (r in grantResults) {
                 if (r == PackageManager.PERMISSION_DENIED) {
-                    flutterResult!!.success(false)
+                    flutterResult?.success(false)
                     return false
                 }
             }
-            flutterResult!!.success(callNumber(number))
+            flutterResult?.success(callNumber(number))
         }
         return true
     }
@@ -131,7 +131,7 @@ internal class FlutterPhoneDirectCallerHandler :
         get() = activityPluginBinding!!.activity
 
     companion object {
-        private const val CALL_REQ_CODE = 0
+        private const val CALL_REQ_CODE = 101
         private const val CALL_PHONE = Manifest.permission.CALL_PHONE
     }
 }
